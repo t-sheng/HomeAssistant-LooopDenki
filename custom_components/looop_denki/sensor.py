@@ -1,4 +1,4 @@
-"""Sensor entities for Looop Denki."""
+﻿"""Sensor entities for Looop Denki."""
 
 from __future__ import annotations
 
@@ -32,13 +32,13 @@ METRICS: tuple[MetricDef, ...] = (
         key="current_energy_price",
         name="Current Energy Price",
         value_fn=lambda day, raw: _current_value(day, raw),
-        unit="JPY",
+        unit="JPY/kWh",
     ),
     MetricDef(
         key="lowest_energy_price",
         name="Lowest Energy Price",
         value_fn=lambda day, _: None if day is None else day.min_price,
-        unit="JPY",
+        unit="JPY/kWh",
     ),
     MetricDef(
         key="lowest_energy_price_hours",
@@ -49,7 +49,7 @@ METRICS: tuple[MetricDef, ...] = (
         key="highest_energy_price",
         name="Highest Energy Price",
         value_fn=lambda day, _: None if day is None else day.max_price,
-        unit="JPY",
+        unit="JPY/kWh",
     ),
     MetricDef(
         key="highest_energy_price_hours",

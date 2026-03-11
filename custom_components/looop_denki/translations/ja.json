@@ -1,0 +1,44 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Looop Denki",
+        "description": "エリアコードと価格オフセットを設定します。",
+        "data": {
+          "area_code": "エリアコード",
+          "price_offset": "価格オフセット"
+        }
+      }
+    },
+    "error": {
+      "invalid_area_code": "エリアコードが不正です"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Looop Denki オプション",
+        "description": "エリアコードと価格オフセットを更新します。",
+        "data": {
+          "area_code": "エリアコード",
+          "price_offset": "価格オフセット"
+        }
+      }
+    },
+    "error": {
+      "invalid_area_code": "エリアコードが不正です"
+    }
+  },
+  "entity": {
+    "select": {
+      "graph_day": {
+        "name": "グラフ日付"
+      }
+    },
+    "sensor": {
+      "selected_day_price_dataset": {
+        "name": "選択日の価格データ"
+      }
+    }
+  }
+}

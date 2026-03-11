@@ -1,0 +1,32 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Looop Denki",
+        "description": "Set area code and optional price offset.",
+        "data": {
+          "area_code": "Area Code",
+          "price_offset": "Price Offset"
+        }
+      }
+    },
+    "error": {
+      "invalid_area_code": "Invalid area code selected"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Looop Denki Options",
+        "description": "Update area code and offset.",
+        "data": {
+          "area_code": "Area Code",
+          "price_offset": "Price Offset"
+        }
+      }
+    },
+    "error": {
+      "invalid_area_code": "Invalid area code selected"
+    }
+  }
+}

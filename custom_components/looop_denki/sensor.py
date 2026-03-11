@@ -8,7 +8,7 @@ from typing import Any
 
 from homeassistant.components.sensor import SensorEntity, SensorStateClass
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import CURRENCY_YEN
+from homeassistant.const import UnitOfCurrency
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
@@ -33,13 +33,13 @@ METRICS: tuple[MetricDef, ...] = (
         key="current_energy_price",
         name="Current Energy Price",
         value_fn=lambda day, raw: _current_value(day, raw),
-        unit=CURRENCY_YEN,
+        unit=UnitOfCurrency.YEN,
     ),
     MetricDef(
         key="lowest_energy_price",
         name="Lowest Energy Price",
         value_fn=lambda day, _: None if day is None else day.min_price,
-        unit=CURRENCY_YEN,
+        unit=UnitOfCurrency.YEN,
     ),
     MetricDef(
         key="lowest_energy_price_hours",
@@ -50,7 +50,7 @@ METRICS: tuple[MetricDef, ...] = (
         key="highest_energy_price",
         name="Highest Energy Price",
         value_fn=lambda day, _: None if day is None else day.max_price,
-        unit=CURRENCY_YEN,
+        unit=UnitOfCurrency.YEN,
     ),
     MetricDef(
         key="highest_energy_price_hours",

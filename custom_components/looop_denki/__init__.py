@@ -46,7 +46,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
                 )
             ]
         )
-        panel_custom.async_register_panel(
+        await panel_custom.async_register_panel(
             hass,
             webcomponent_name="looop-denki-panel",
             frontend_url_path=PANEL_URL_PATH,

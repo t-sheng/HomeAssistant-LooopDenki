@@ -58,6 +58,12 @@ METRICS: tuple[MetricDef, ...] = (
     ),
 )
 
+DAY_METRIC_ALLOWLIST: dict[str, set[str]] = {
+    "yesterday": {"current_energy_price"},
+    "today": {metric.key for metric in METRICS},
+    "tomorrow": {"lowest_energy_price", "lowest_energy_price_hours", "highest_energy_price", "highest_energy_price_hours"},
+}
+
 
 async def async_setup_entry(
     hass: HomeAssistant,
@@ -68,8 +74,18 @@ async def async_setup_entry(
     coordinator: LooopDenkiCoordinator = hass.data[DOMAIN][entry.entry_id].coordinator
 
     entities: list[SensorEntity] = []
+    metrics_by_key = {metric.key: metric for metric in METRICS}
+
+    metric_order = [metric.key for metric in METRICS]
+
     for day_key, label in DAY_LABELS.items():
-        for metric in METRICS:
+        allowed_metric_keys = DAY_METRIC_ALLOWLIST.get(day_key, set())
+        for metric_key in metric_order:
+            if metric_key not in allowed_metric_keys:
+                continue
+            metric = metrics_by_key.get(metric_key)
+            if metric is None:
+                continue
             entities.append(
                 LooopDenkiDayMetricSensor(
                     coordinator=coordinator,

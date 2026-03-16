@@ -4,7 +4,7 @@
   "codeowners": ["@raten"],
   "config_flow": true,
   "documentation": "https://github.com/raten/HomeAssistant-LooopDenki",
-  "integration_type": "service",
+  "integration_type": "hub",
   "iot_class": "cloud_polling",
   "issue_tracker": "https://github.com/raten/HomeAssistant-LooopDenki/issues",
   "loggers": ["custom_components.looop_denki"],

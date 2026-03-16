@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import logging
+
 from homeassistant.components.select import SelectEntity
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
@@ -10,6 +12,8 @@ from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .const import DAY_LABELS, DOMAIN
 from .coordinator import LooopDenkiCoordinator
+
+_LOGGER = logging.getLogger(__name__)
 
 
 async def async_setup_entry(
@@ -49,5 +53,15 @@ class LooopDenkiDaySelector(CoordinatorEntity[LooopDenkiCoordinator], SelectEnti
     async def async_select_option(self, option: str) -> None:
         """Change selected day."""
         label_to_key = {label: key for key, label in DAY_LABELS.items()}
-        self.coordinator.selected_day = label_to_key.get(option, "today")
+        selected_day = label_to_key.get(option)
+        if selected_day is None:
+            _LOGGER.debug("Rejected unsupported day selection option=%s", option)
+            return
+
+        if self.coordinator.selected_day == selected_day:
+            return
+
+        self.coordinator.selected_day = selected_day
+        _LOGGER.debug("Graph day changed to %s via select entity", selected_day)
+        self.async_write_ha_state()
         self.coordinator.async_update_listeners()
